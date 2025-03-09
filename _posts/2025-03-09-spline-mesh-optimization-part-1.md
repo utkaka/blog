@@ -46,6 +46,7 @@ Additionally, we'll use our test scene for both testing and profiling. Now, let'
 | IL2CPP - 50 simple meshes | 52.1913  | 60.2441  | 58.4168  | 58.0337566666667 |
 | Mono - 1 Big mesh         | 113.4949 | 119.7267 | 117.1779 | 116.80328        |
 | Mono - 50 simple meshes   | 107.682  | 117.7221 | 110.545  | 111.915016666667 |
+
 Now, let's take a look at the profiler and start identifying issues.
 
 #### Reducing Allocations
@@ -346,6 +347,7 @@ Don’t pay too much attention to the increased timings in the profiler for now,
 | testResults - IL2CPP - 50 simple meshes | 40.7038 | 42.7063 | 41.668  | 41.64089         |
 | testResults - Mono - 1 Big mesh         | 49.4439 | 50.3378 | 49.9846 | 49.9465366666667 |
 | testResults - Mono - 50 simple meshes   | 57.4371 | 59.4481 | 58.3213 | 58.2975433333333 |
+
 The next suspicious area is `SourceMesh`. This object is used by the author to store information about the original mesh. This time, it’s the other way around. Instead of using a class, the author made it a struct, but with a reference-type field.
 
 ```C#
